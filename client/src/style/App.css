@@ -50,3 +50,7 @@
 #nav-bar-container {
   grid-column: 1;
 }
+
+body {
+  font-family: Avenir;
+}
