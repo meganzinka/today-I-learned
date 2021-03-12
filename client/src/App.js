@@ -16,8 +16,8 @@ function App() {
         </div>
         <div id="main-container">
           <Switch>
-            <Route path="/" component = {Home} />
-            <Route path = "/facts" component = {Entries} />
+            <Route exact path="/" component = {Home} />
+            <Route exact path = "/facts" component = {Entries} />
             <Route path = "/facts/:objectid"  component = {EditAndDelete} />
           </Switch>
         </div>

@@ -1,0 +1,26 @@
+Project To Do: 
+- make it switch pages
+
+Home: add entries 
+- get the date to submit 
+- create an "other" category 
+- get the form to clear
+
+
+View Entries 
+/facts
+- list all entries
+- do something to list duplicate entries together 
+- dropdown with tags
+
+Edit/Delete entries 
+
+/facts/objectID
+- list specific entry
+- create form with inputs for each key on the object and values from the database already filled in ?
+- delete button makes confirmation show up 
+- answer yes means to delete from collection 
+- get the 200 error code and be redirected home 
+
+
+- Styling 

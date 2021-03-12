@@ -1,40 +1,50 @@
-require("dotenv").config();
-
-const DataStore = require("./log.js");
+//Imports
+const mongoose = require('mongoose')
 const express = require("express");
 const path = require("path");
-const app = express();
-const staticDir = path.resolve("./client/public");
-const port = process.env.PORT || 5000;
-const tilDB = new DataStore("mongodb://localhost:27017", "log", "entries");
 const { MongoClient, ObjectId } = require("mongodb");
-const mongoose = require('mongoose')
-const entriesDB = mongoose.connection 
+require("dotenv").config();
 
+
+//Global variables
+const port = process.env.PORT || 5000;
+const staticDir = path.resolve("./client/public");
+
+
+//Server set-up 
+const app = express();
 app.use(express.static(staticDir));
-mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true})
+app.use(express.urlencoded({extended: true}))
 
 
-entriesDB.on('error', console.error.bind(console, 'connection error:'))
+//Database Set-up 
+mongoose.connect('mongodb://localhost:27017/log')
+//I guess we don't need these?:{ useNewUrlParser: true, useUnifiedTopology: true}
 
 const entrySchema = new mongoose.Schema({
   title: String,
   content: String,
-  tag: Array, 
-  date: DateTime
+  tag: Array,
+  date: Date
 })
 
 const EntriesModel = mongoose.model('entries', entrySchema);
 
+const entriesDB = mongoose.connection 
 
+//Port setup 
+app.listen(port, () => {
+  console.log("listening on port", port);
+});
 
-
-app.post('/post', async (request, response) => {
+//Post a new TIL entry 
+app.post('/post', (request, response) => {
+  console.log(request.body)
   const newEntry = new EntriesModel({
-    title: req.body.title, 
-    content: req.body.content,
-    tag: req.body.tag,
-    date: Date.now()
+    title: request.body.title, 
+    content: request.body.content,
+    tag: request.body.tag,
+    date: request.body.date
   })
 
   console.log(newEntry)
@@ -42,10 +52,20 @@ app.post('/post', async (request, response) => {
     if (err) throw err;
     console.log("Entry added")
   })
+  response.status(200).send("success")
 })
 
-module.exports = router 
+app.get('/showall', async (request, response) => {
+  const cursor = await EntriesModel.find({})
+  let results = [] 
+  await cursor.forEach((entry) => {
+    results.push(entry)
+  })
+console.log(results)
+response.json(results)
+})
 
-app.listen(port, () => {
-  console.log("listening on port", port);
-});
+
+
+entriesDB.on('error', console.error.bind(console, 'connection error:'))
+
