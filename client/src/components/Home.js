@@ -2,12 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const Home = () => {
-    function submitDate () {
-        console.log(Date.now())
-        return Date.now()
-    }
-
-
+  //add entry form with fields for title, content, tags, submit 
   return (
     <div>
       <h1> Home Page add entry </h1>
@@ -45,7 +40,7 @@ const Home = () => {
           <input type="checkbox" id="other" name="tag" value="other" />
           <label for="other">other</label>
         </div>
-        <input name = "date" type = "hidden" value = {submitDate}/>
+        <input name = "date" type = "hidden" />
         <input type="submit" value="Submit" />
       </form>
     </div>
