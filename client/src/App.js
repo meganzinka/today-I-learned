@@ -9,17 +9,23 @@ import { Route, Switch, Link } from "react-router-dom";
 function App() {
   return (
     <div>
-      <header>
-        <h1 id="app-header">Today I Learned Some Things</h1></header>
+      <header id="app-header">
+        <span>
+          <h1>
+            <img src="https://iconfair.com/cepsools/2020/08/1-55.png" />
+               Today I Learned 
+          </h1>
+        </span>
+      </header>
       <div id="app-container">
         <div id="nav-bar-container">
           <NavBar id="nav-bar" />
         </div>
         <div id="main-container">
           <Switch>
-            <Route exact path="/" component = {Home} />
-            <Route exact path = "/facts" component = {Entries} />
-            <Route path = "/facts/:objectid"  component = {EditAndDelete} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/facts" component={Entries} />
+            <Route path="/facts/:objectid" component={EditAndDelete} />
           </Switch>
         </div>
       </div>

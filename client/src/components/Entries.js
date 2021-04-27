@@ -36,7 +36,7 @@ const Entries = () => {
     <div >
       <h1 class="page-header">TIL Entries</h1>
       <h4>Search by Tag</h4>
-      <div class="dropdown">
+      <div class="tag-bar">
         <Link class="tag-link" onClick={changeTag} to={`/facts`} id="all">
           Show All
         </Link>
@@ -72,7 +72,7 @@ const Entries = () => {
               <p>{obj.content}</p>
               <p>Posted on: {obj.date}</p>
               <Link to={`/facts/${obj._id}`}>
-                <button>Edit/Delete</button>
+                <button class = "button">Edit/Delete</button>
               </Link>
             </div>
           );
@@ -89,7 +89,7 @@ const Entries = () => {
                 <p>{obj.content}</p>
                 <p>Posted on: {obj.date}</p>
                 <Link to={`/facts/${obj._id}`}>
-                  <button>Edit/Delete</button>
+                  <button class="button">Edit/Delete</button>
                 </Link>
               </div>
             );

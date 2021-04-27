@@ -1,21 +1,18 @@
 import React from "react";
 import {Link} from "react-router-dom"
+
+
 const NavBar = () => {
   //side-bar directory to lead to all entries & add entry pages 
   return (
-    <div>
-      <header class = "page-header">
-        <h1>Directory</h1>
-      </header>
-      <div id="navBar-container">
-        <Link class="navBar-links" to={"/"}>
-          Add Entry
+    <div id="navBar-container">
+      <header class="page-header">Directory</header>
+        <Link class="nav-bar-links" to="/">
+          Submit Entry
         </Link>
-        <br></br>
-        <Link to={"/facts"} class="navBar-links" path={"/facts"}>
-          View Entries
+        <Link class="nav-bar-links" to="/facts">
+          View All Entries
         </Link>
-      </div>
     </div>
   );
 };

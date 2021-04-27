@@ -1,17 +1,9 @@
 Project To Do: 
 
 Home: add entries 
-- get the form to clear
-- figure out how to get page to reload 
 
-View Entries 
-/facts
-- do something to list duplicate entries together 
 
-Edit/Delete entries 
-/facts/objectID
 - create form with inputs for each key on the object and values from the database already filled in ?
-- get the 200 error code and be redirected home 
 
 
 - Styling 

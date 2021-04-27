@@ -1,66 +1,99 @@
-.App {
+
+/*--------------Header------------*/ 
+
+#app-header { 
+  background-color: #264653;
+  color: #dbe7e4;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 0cm;
+  width:100%;
+  vertical-align: middle;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  font-size: 3em;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/*--------------App (Main Page) Settings------------*/ 
 
 #app-container {
   display:grid;
   grid-template-columns: 1fr 0.25fr 3fr;
 }
 
+
+.page-header {
+  background-color: #264653;
+  color: #dbe7e4;
+  text-align: center;
+  justify-content: center;
+  margin: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%
+
+}
+h1 {
+  margin:0cm;
+}
+
+img {
+  height: 75px;
+  width: 75px;
+}
+
 #main-container {
   grid-column: 3;
+  margin: 30px;
 }
 
 #nav-bar-container {
   grid-column: 1;
+  margin: 30px;
 }
 
 body {
-  font-family: Avenir;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0; 
+    background-color: #faf9f9;
+  color: #555b6e;
 }
 
-/*new post formatting*/
-#title {
+h5 {
+  display: inline; 
+}
+h4 {
+  margin:0cm
+}
+
+
+/*--------------Nav Bar Component------------*/ 
+
+.nav-bar-links {
+  background-color: #89b0ae;
+  color: #faf9f9;
+  padding: 10px; 
+  font-size: 16px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 2px #d8d8d8;
+  display: inline-block;
+  margin: 5px;
+  width:100%;
+  text-decoration: none;
+  border: none;
+  text-align: center;
+  font-family:'Courier New', Courier, monospace
+}
+
+/*--------------Add Entry Component------------*/ 
+#new-post-title {
   width: 100%;
 }
 
-#content {
+#new-post-content {
   width: 100%;
   height: 30vh;
   display: flex;
@@ -69,9 +102,27 @@ body {
   font-family: Avenir;
 }
 
+/*use this to separate entries*/
 #entry {
   border-bottom: black double 5px;
 }
+
+/*--------------View All Component------------*/ 
+
+.button {
+  background-color: #89b0ae;
+  color: #faf9f9;
+  padding: 4px; 
+  font-size: 16px;
+  border-radius: 5%;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 2px #d8d8d8;
+  display: inline-block;
+  margin: 5px;
+  border: none;
+}
+/*--------------Edit/Delete Pop-up------------*/ 
 
 .message-wrapper {
   display: flex;
@@ -92,10 +143,8 @@ body {
 .message {
   height: 40vh;
   width: 60vw;
-  border-radius: 20px;
-  border: solid black 2px;
+  border-radius: 10px;
   background-color: #faf9f9;
-  padding: 10px;
   display:flex;
   flex-direction: column;
   justify-content: space-between;
@@ -103,34 +152,12 @@ body {
 
 }
 
-.page-header {
-  background-color: #555b6e;
+.popup-header {
+    background-color: #555b6e;
   color: #faf9f9;
-  border-radius: 2%;
-  text-align: center;
-
-
-}
-
-body {
-  background-color: #faf9f9;
-  color: #555b6e;
-}
-
-h5 {
-  display: inline; 
-}
-
-#app-header { 
-  background-color: #dbe7e4;
-  color: #1b263b;
-  text-align: center;
-  justify-content: center;
-  margin: 0;
-  width:100%;
-  vertical-align: middle;
-  padding-top: 5vw;
-  padding-bottom: 5vw; 
+    text-align: center;
+    padding: 0;
+    margin: 0; 
 }
 
 .tag-link { 
@@ -145,29 +172,36 @@ h5 {
   display: inline-block;
 }
 
-.dropdown {
+.tag-bar {
   position: relative; 
   display: flex;
   justify-content: space-between;
     margin-bottom: 20px;
 }
 
-button {
-  background-color: #89b0ae;
-  color: #faf9f9;
-  padding: 4px; 
-  font-size: 16px;
-  border-radius: 5%;
-  font-weight: bold;
-  text-transform: uppercase;
-  box-shadow: 3px 3px 2px #d8d8d8;
-  display: inline-block;
-  margin: 5px;
+#choose-edit-field{
+  font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
-h4 {
-  margin:0cm
+select, option{
+    background:transparent;
+    width: 170px;
+    padding: 2px;
+  font-family: 'Courier New', Courier, monospace;    font-size: 30px;
+    font-weight:600;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    height: 40px;
 }
+
+#edit-box { 
+  width:75%;
+  height: 75%;
+  font-family: Avenir; 
+}
+
 
 
 

@@ -5,12 +5,12 @@ const Home = () => {
   //add entry form with fields for title, content, tags, submit 
   return (
     <div>
-      <h1> Home Page add entry </h1>
+      <h1 class = "page-header"> What did you learn today? </h1>
       <form action="/post" method="POST">
         <label>Post Title</label>
-        <input type="text" name="title" id="title" />
+        <input type="text" name="title" id="new-post-title" />
         <label>Post Content</label>
-        <textarea type="text" name="content" id="content" />
+        <textarea type="text" name="content" id="new-post-content" />
         <div>
           <input type="checkbox" id="science" name="tag" value="science" />
           <label for="science">science</label>

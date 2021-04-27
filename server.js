@@ -12,7 +12,13 @@ const staticDir = path.resolve("./client/public");
 //Server set-up
 const app = express();
 app.use(express.static(staticDir));
-app.use(express.urlencoded({ extended: true }));
+app.use(
+  express.urlencoded({
+    extended: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+);
 
 //Database Set-up
 mongoose.connect("mongodb://localhost:27017/log");
@@ -53,12 +59,13 @@ app.post("/post", (request, response) => {
 });
 
 //I obviously did not figure out how to do this - I couldn't get the info to communicate to the server
-app.post("/edit/:_id"),
-  (request, response) => {
-    // console.log(request.body)
-    // let updateEntry = { [category]: update }
-    response.send("this worked?");
-  };
+app.post("/edit/:_id", async (request, response) => {
+  console.log(request.body);
+  let entryId = { _id: request.params._id };
+  let updateEntry = { [request.body.category]: request.body.update };
+  await EntriesModel.updateOne(entryId, updateEntry);
+  response.redirect(path.resolve("/facts"));
+});
 
 //show all results
 app.get("/showall", async (request, response) => {

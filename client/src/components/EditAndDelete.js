@@ -7,7 +7,9 @@ const EditAndDelete = (props) => {
   const [entry, setEntry] = useState();
   const [deleteEntry, setDeleteEntry] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(false);
-  const [edit, setEdit] = useState(false);
+  const [editField, setEditField] = useState("title");
+  const [editMode, setEditMode] = useState(false)
+  const [editContent, setEditContent] = useState("")
 
   //use setLoadentry to load the single entry and stop fetch
   useEffect(() => {
@@ -19,12 +21,18 @@ const EditAndDelete = (props) => {
         });
       setLoadEntry(false);
     } else if (deleteEntry) {
-      console.log("inside else if");
       //if user wants to delete, set deleteEntry to true and fetch
       fetch(`/delete/${props.match.params.objectid}`);
       setDeleteEntry(false);
     }
   });
+
+  //capitalize field 
+  function capitalize (word) {
+        let newWord = word.toString().toLowerCase().trim();
+        let newFirst = newWord[0].toUpperCase()
+        return newFirst + newWord.slice(1)
+  }
 
   //use when user confirms that they want to delete entry
   function setDelete(event) {
@@ -40,8 +48,19 @@ const EditAndDelete = (props) => {
   //used to show and hide the edit entry pop-up
   function editMessage(event) {
     if (event.target.value === "cancel") {
-      setEdit(false);
-    } else setEdit(event.target.value);
+      setEditMode(false);
+    } else setEditMode(true);
+  }
+
+  function selectCategory (event) {
+    setEditField(event.target.value);
+    setEditContent(entry[editField]);
+    console.log("in selectCategory function", editField);
+  }
+  console.log("editField:", editField)
+  {entry ? console.log("entry[editfield]:", entry[editField]) : null}
+
+  function displayCurrentContent (editField) {
   }
 
   //if the user clicks on delete, it will show this delete message
@@ -51,55 +70,82 @@ const EditAndDelete = (props) => {
         <div class="message-wrapper">
           <div class="message">
             <h1>Are you sure you want to delete this entry?</h1>
-            <button onClick={setDelete}>Delete</button>
-            <button onClick={deleteMessageFun}>Cancel</button>
+            <button class="button" onClick={setDelete}>
+              Delete
+            </button>
+            <button class="button" onClick={deleteMessageFun}>
+              Cancel
+            </button>
           </div>
         </div>
       </div>
     );
   }
   //if there is an entry and the user hasn't clicked edit or delete, show the entry w/ title, tags, content, options to delete and edit
-  else if (entry && !edit) {
+  else if (entry && !editMode) {
     return (
-      <div id="edit-entry">
-        <h1>Edit an Entry</h1>
+      <div>
+        <h1 class = "page-header">Edit an Entry</h1>
         <h4 class="edit-item">{entry.title}</h4>
-        <button value="title" onClick={editMessage}>
-          Edit Title
-        </button>
         <br></br>
         <h5 class="edit-item">Tags:</h5>
         {entry.tag.map((item) => {
           return <h5> {item} </h5>;
         })}
         <br></br>
-        <button onClick={editMessage} value="tags">
-          Edit Tags
-        </button>
         <p class="edit-item">{entry.content}</p>
-        <button onClick={editMessage} value="content">
-          Edit Content
+        <button class="button" onClick={editMessage} value="content">
+          Edit Entry
         </button>
         <br></br>
-        <button onClick={deleteMessageFun}>Delete Entry</button>
+        <button class="button" onClick={deleteMessageFun}>
+          Delete Entry
+        </button>
       </div>
     );
     //if user hits "edit" --- this part is not finished
-  } else if (edit) {
+  } else if (editMode) {
     return (
       <div>
         <div class="message-wrapper">
           <div class="message">
             {/* //create a form to submit edits  */}
-            <form action={`edit/${props.match.params.objectid}`} method="post">
+            <form action={`/edit/${props.match.params.objectid}`} method="post">
               {/* Show the area that the user said they want to edit & allow a space for them to write in edits */}
-              <h1>Edit {edit}</h1>
-              <p>Current text: {entry[edit]}</p>
-              <label>Desired text</label>
-              <textarea type="text" name="update" />
-              <input display="none" name="category" value={edit} />
-              <input type="submit" value="Submit" />
-              <button onClick={editMessage}>Cancel</button>
+              <h1 class="popup-header">Edit {capitalize(editField)}</h1>
+              <div id="choose-edit-field">
+                <label>Edit:</label>
+                <select name="category" onChange={selectCategory}>
+                  <option value="title">Title</option>
+                  <option value="tag">Tag</option>
+                  <option value="content">Content</option>
+                </select>
+              </div>
+              {editField === "tag" ? (
+                <div>
+                  <h5>Current {editField}:</h5>
+                  <p>{entry[editField]}</p>
+                  <select name="update">
+                    <option value="science">Science</option>
+                    <option value="history">History</option>
+                    <option value="politics">Politics</option>
+                    <option value="health">Health</option>
+                    <option value="arts">Arts</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              ) : (
+                <div>
+                  <h5>Current {editField}:</h5>
+                  <p>{entry[editField]}</p>
+                  <textarea id="edit-box" type="text" name="update" />
+                </div>
+              )}
+              <br></br>
+              <input class="button" type="submit" value="Submit" />
+              <button class="button" onClick={editMessage}>
+                Cancel
+              </button>
             </form>
           </div>
         </div>
