@@ -1,16 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
 const Home = () => {
   //add entry form with fields for title, content, tags, submit 
   return (
     <div>
-      <h1 class = "page-header"> What did you learn today? </h1>
+      <h1 class="page-header"> What did you learn today? </h1>
       <form action="/post" method="POST">
         <label>Post Title</label>
-        <input type="text" name="title" id="new-post-title" />
+        <input type="text" name="title" id="new-post-title" required />
         <label>Post Content</label>
-        <textarea type="text" name="content" id="new-post-content" />
+        <textarea type="text" name="content" id="new-post-content" required />
         <div>
           <input type="checkbox" id="science" name="tag" value="science" />
           <label for="science">science</label>
@@ -20,12 +19,7 @@ const Home = () => {
           <label for="history">history</label>
         </div>
         <div>
-          <input
-            type="checkbox"
-            id="politics"
-            name="tag"
-            value="politics"
-          />
+          <input type="checkbox" id="politics" name="tag" value="politics" />
           <label for="politics">politics</label>
         </div>
         <div>
@@ -40,7 +34,7 @@ const Home = () => {
           <input type="checkbox" id="other" name="tag" value="other" />
           <label for="other">other</label>
         </div>
-        <input name = "date" type = "hidden" />
+        <input name="date" type="hidden" />
         <input type="submit" value="Submit" />
       </form>
     </div>

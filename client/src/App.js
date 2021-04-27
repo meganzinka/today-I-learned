@@ -3,7 +3,7 @@ import EditAndDelete from "./components/EditAndDelete";
 import NavBar from "./components/NavBar";
 import Entries from "./components/Entries";
 import Home from "./components/Home";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 //simple home page design with nav-bar on left, switching between all entries & add entry 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <header id="app-header">
         <span>
           <h1>
-            <img src="https://iconfair.com/cepsools/2020/08/1-55.png" />
+            <img src="https://iconfair.com/cepsools/2020/08/1-55.png" alt="light bulb with brain lighting up"/>
                Today I Learned 
           </h1>
         </span>

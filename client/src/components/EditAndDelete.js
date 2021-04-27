@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import "./../style/EditAndDelete.css"
 
 const EditAndDelete = (props) => {
   const [loadEntry, setLoadEntry] = useState(true);
@@ -18,6 +18,7 @@ const EditAndDelete = (props) => {
         .then((res) => res.json())
         .then((object) => {
           setEntry(object);
+          console.log(object)
         });
       setLoadEntry(false);
     } else if (deleteEntry) {
@@ -57,8 +58,6 @@ const EditAndDelete = (props) => {
     setEditContent(entry[editField]);
     console.log("in selectCategory function", editField);
   }
-  console.log("editField:", editField)
-  {entry ? console.log("entry[editfield]:", entry[editField]) : null}
 
   function displayCurrentContent (editField) {
   }
@@ -67,13 +66,13 @@ const EditAndDelete = (props) => {
   if (deleteMessage) {
     return (
       <div>
-        <div class="message-wrapper">
-          <div class="message">
+        <div className="message-wrapper">
+          <div className="message">
             <h1>Are you sure you want to delete this entry?</h1>
-            <button class="button" onClick={setDelete}>
+            <button className="button" onClick={setDelete}>
               Delete
             </button>
-            <button class="button" onClick={deleteMessageFun}>
+            <button className="button" onClick={deleteMessageFun}>
               Cancel
             </button>
           </div>
@@ -85,20 +84,20 @@ const EditAndDelete = (props) => {
   else if (entry && !editMode) {
     return (
       <div>
-        <h1 class = "page-header">Edit an Entry</h1>
-        <h4 class="edit-item">{entry.title}</h4>
+        <h1 Name = "page-header">Edit an Entry</h1>
+        <h4 className="edit-item">{entry.title}</h4>
         <br></br>
-        <h5 class="edit-item">Tags:</h5>
-        {entry.tag.map((item) => {
-          return <h5> {item} </h5>;
+        <h5 className="edit-item">Tags:</h5>
+        {entry.tag.map((item, index) => {
+          return <h5 key ={index}> {item} </h5>;
         })}
         <br></br>
-        <p class="edit-item">{entry.content}</p>
-        <button class="button" onClick={editMessage} value="content">
+        <p className="edit-item">{entry.content}</p>
+        <button className="button" onClick={editMessage} value="content">
           Edit Entry
         </button>
         <br></br>
-        <button class="button" onClick={deleteMessageFun}>
+        <button className="button" onClick={deleteMessageFun}>
           Delete Entry
         </button>
       </div>
@@ -107,45 +106,80 @@ const EditAndDelete = (props) => {
   } else if (editMode) {
     return (
       <div>
-        <div class="message-wrapper">
-          <div class="message">
+        <div className="message-wrapper">
+          <div className="message">
             {/* //create a form to submit edits  */}
             <form action={`/edit/${props.match.params.objectid}`} method="post">
               {/* Show the area that the user said they want to edit & allow a space for them to write in edits */}
-              <h1 class="popup-header">Edit {capitalize(editField)}</h1>
-              <div id="choose-edit-field">
-                <label>Edit:</label>
-                <select name="category" onChange={selectCategory}>
-                  <option value="title">Title</option>
-                  <option value="tag">Tag</option>
-                  <option value="content">Content</option>
-                </select>
+              <h1 className="popup-header">Edit Entry</h1>
+              <div id="edit-info">
+                Edit Title:
+                <input
+                  id="edit-title"
+                  type="text"
+                  name="update"
+                  defaultValue={entry.title}
+                />
+                <br></br>
+                Edit Content:
+                <input
+                  id="edit-content"
+                  type="text"
+                  name="update"
+                  defaultValue={entry.content}
+                />
+                <div>
+                  Edit Tag:
+                  <br></br>
+                  <input
+                    type="checkbox"
+                    id="science"
+                    name="tag"
+                    value="science"
+                  />
+                  <label for="science">science</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="history"
+                    name="tag"
+                    value="history"
+                  />
+                  <label for="history">history</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="politics"
+                    name="tag"
+                    value="politics"
+                  />
+                  <label for="politics">politics</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="health"
+                    name="tag"
+                    value="health"
+                  />
+                  <label for="health">health</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="arts" name="tag" value="arts" />
+                  <label for="arts">arts</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="other" name="tag" value="other" />
+                  <label for="other">other</label>
+                </div>
+                <br></br>
+                <input className="button" type="submit" value="Submit" />
+                <button className="button" onClick={editMessage}>
+                  Cancel
+                </button>
               </div>
-              {editField === "tag" ? (
-                <div>
-                  <h5>Current {editField}:</h5>
-                  <p>{entry[editField]}</p>
-                  <select name="update">
-                    <option value="science">Science</option>
-                    <option value="history">History</option>
-                    <option value="politics">Politics</option>
-                    <option value="health">Health</option>
-                    <option value="arts">Arts</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              ) : (
-                <div>
-                  <h5>Current {editField}:</h5>
-                  <p>{entry[editField]}</p>
-                  <textarea id="edit-box" type="text" name="update" />
-                </div>
-              )}
-              <br></br>
-              <input class="button" type="submit" value="Submit" />
-              <button class="button" onClick={editMessage}>
-                Cancel
-              </button>
             </form>
           </div>
         </div>
