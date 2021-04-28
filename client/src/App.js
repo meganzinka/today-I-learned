@@ -11,10 +11,10 @@ function App() {
     <div>
       <header id="app-header">
         <span>
-          <h1>
+          <div>
             <img src="https://iconfair.com/cepsools/2020/08/1-55.png" alt="light bulb with brain lighting up"/>
                Today I Learned 
-          </h1>
+          </div>
         </span>
       </header>
       <div id="app-container">
