@@ -14,18 +14,18 @@ const Entries = () => {
         .then((res) => res.json())
         .then((list) => {
           let array = [];
-          //take each entry object and put it into a list 
+          //take each entry object and put it into a list
           list.forEach((item) => {
             array.push(item);
           });
-          //make the list the entry array 
+          //make the list the entry array
           setEntryArray(array);
         });
     }
     setLoadEntries(false);
   });
 
-  //set the tag to show only entries of a certain tag 
+  //set the tag to show only entries of a certain tag
   function changeTag(event) {
     let newTag = event.target.id;
     setChosenTag(newTag);
@@ -33,31 +33,30 @@ const Entries = () => {
 
   // Create a link for each tag which will filter to only those entries with the tag
   return (
-    <div >
+    <div>
       <h1 class="page-header">TIL Entries</h1>
-      <h4>Search by Tag</h4>
       <div class="tag-bar">
-        <Link class="tag-link" onClick={changeTag} to={`/facts`} id="all">
+        <div class="tag-link" onClick={changeTag} to={`/facts`} id="all">
           Show All
-        </Link>
-        <Link class="tag-link" onClick={changeTag} to={`/facts`} id="science">
+        </div>
+        <div class="tag-link" onClick={changeTag} to={`/facts`} id="science">
           Science
-        </Link>
-        <Link onClick={changeTag} class="tag-link" to={`/facts`} id="history">
+        </div>
+        <div onClick={changeTag} class="tag-link" to={`/facts`} id="history">
           History
-        </Link>
-        <Link onClick={changeTag} class="tag-link" to={`/facts`} id="politics">
+        </div>
+        <div onClick={changeTag} class="tag-link" to={`/facts`} id="politics">
           Politics
-        </Link>
-        <Link onClick={changeTag} class="tag-link" to={`/facts`} id="health">
+        </div>
+        <div onClick={changeTag} class="tag-link" to={`/facts`} id="health">
           Health
-        </Link>
-        <Link onClick={changeTag} class="tag-link" to={`/facts`} id="arts">
+        </div>
+        <div onClick={changeTag} class="tag-link" to={`/facts`} id="arts">
           Arts
-        </Link>
-        <Link onClick={changeTag} class="tag-link" to={`/facts`} id="other">
+        </div>
+        <div onClick={changeTag} class="tag-link" to={`/facts`} id="other">
           Other
-        </Link>
+        </div>
       </div>
       {/* If a tag has not been chosen, show all entries - map thrhough each item, show title, map through each tag, show content, link to edit/delete */}
       {entryArray.map((obj, index) => {
@@ -70,9 +69,15 @@ const Entries = () => {
                 return <h5> {item} </h5>;
               })}
               <p>{obj.content}</p>
+              <p>
+                <a href={obj.link} target="blank">
+                  Source
+                </a>
+              </p>
               <p>Posted on: {obj.date}</p>
+              <br></br>
               <Link to={`/facts/${obj._id}`}>
-                <button class = "button">Edit/Delete</button>
+                <button class="button">Edit/Delete</button>
               </Link>
             </div>
           );
@@ -87,6 +92,11 @@ const Entries = () => {
                   return <h5> {item} </h5>;
                 })}
                 <p>{obj.content}</p>
+                <p>
+                  <a href={obj.link} target="blank">
+                    Source
+                  </a>
+                </p>
                 <p>Posted on: {obj.date}</p>
                 <Link to={`/facts/${obj._id}`}>
                   <button class="button">Edit/Delete</button>

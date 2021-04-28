@@ -46,6 +46,7 @@ app.post("/post", (request, response) => {
     title: request.body.title,
     content: request.body.content,
     tag: request.body.tag,
+    link: request.body.source,
   };
   //create new entry
   const newEntry = new EntriesModel(newObj);

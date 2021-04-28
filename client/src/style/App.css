@@ -9,11 +9,15 @@
   margin: 0cm;
   width:100%;
   vertical-align: middle;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  font-size: 3em;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 2em;
   font-family: 'Courier New', Courier, monospace;
 }
+input, text-area {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 
 /*--------------App (Main Page) Settings------------*/ 
 
@@ -28,13 +32,32 @@
   color: #dbe7e4;
   text-align: center;
   justify-content: center;
-  margin: 5px;
   font-family: 'Courier New', Courier, monospace;
   border-radius: 5px;
-  padding: 10px;
-  width: 100%
-
+  width: 100%;
+  font-weight: lighter; 
+  margin-bottom: 20px; 
 }
+
+#directory-header {
+  background-color: #264653;
+  box-shadow: 3px 3px 2px #d8d8d8;
+  border-radius: 5px;
+  color: #dbe7e4;
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  justify-content: center;
+  margin: 5px;
+  padding: 10px; 
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+
+
+
 h1 {
   margin:0cm;
 }
@@ -68,6 +91,34 @@ h4 {
   margin:0cm
 }
 
+.tag-link { 
+  background-color: #89b0ae;
+  color: #faf9f9;
+  padding: 1vw; 
+  font-size: 1vw;
+  border-radius: 5%;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 2px #d8d8d8;
+  display: inline-block;
+  width: 5vw;
+  text-align: center; 
+}
+
+.tag-link:hover {
+  font-weight: bold;
+  cursor: pointer; 
+}
+
+.tag-bar {
+  display: flex; 
+  justify-content: space-between; 
+  border-bottom: #264653 5px double;
+  padding-bottom: 2vw;
+  padding-top: 2vw;
+  width: 100%; 
+}
+
+
 
 /*--------------Nav Bar Component------------*/ 
 
@@ -87,6 +138,9 @@ h4 {
   text-align: center;
   font-family:'Courier New', Courier, monospace
 }
+.nav-bar-links:hover {
+  font-weight: bold;
+}
 
 /*--------------Add Entry Component------------*/ 
 #new-post-title {
@@ -96,15 +150,18 @@ h4 {
 #new-post-content {
   width: 100%;
   height: 30vh;
-  display: flex;
-  word-wrap: break-word;
-  word-break: break-all;
-  font-family: Avenir;
+  /* word-wrap: break-word;
+  word-break: break-all; */
+  display: flex; 
+  align-content: flex-start;
+  justify-content: flex-start; 
 }
 
 /*use this to separate entries*/
 #entry {
   border-bottom: black double 5px;
+  padding-top: 10px;
+  padding-bottom: 10px; 
 }
 
 /*--------------View All Component------------*/ 
@@ -115,10 +172,22 @@ h4 {
   padding: 4px; 
   font-size: 16px;
   border-radius: 5%;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-transform: uppercase;
   box-shadow: 3px 3px 2px #d8d8d8;
   display: inline-block;
-  margin: 5px;
+  /* margin: 5px; */
   border: none;
+  margin-top: 10px; 
+  font-family:
+   'Courier New', Courier, monospace;
+}
+
+label {
+  font-weight: bold;
+}
+
+.label-container {
+  padding-bottom: 10px; 
+  padding-top: 10px; 
 }
