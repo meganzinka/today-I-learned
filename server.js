@@ -21,7 +21,12 @@ app.use(
 );
 
 //Database Set-up
-mongoose.connect("mongodb://localhost:27017/log");
+mongoose.connect("mongodb://localhost:27017/log", {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 //I guess we don't need these?:{ useNewUrlParser: true, useUnifiedTopology: true}
 
 const entrySchema = new mongoose.Schema({
@@ -29,6 +34,7 @@ const entrySchema = new mongoose.Schema({
   content: String,
   tag: Array,
   date: Date,
+  link: String,
 });
 const EntriesModel = mongoose.model("entries", entrySchema);
 const entriesDB = mongoose.connection;
@@ -39,14 +45,14 @@ app.listen(port, () => {
 });
 
 //Post a new TIL entry
-app.post("/post", (request, response) => {
+app.get("/new-entry/:title/:content/:tag/*", (request, response) => {
   //create new object with request params, date
   let newObj = {
     date: Date.now(),
-    title: request.body.title,
-    content: request.body.content,
-    tag: request.body.tag,
-    link: request.body.source,
+    title: request.params.title,
+    content: request.params.content,
+    tag: request.params.tag,
+    link: request.params[0],
   };
   //create new entry
   const newEntry = new EntriesModel(newObj);
@@ -56,15 +62,17 @@ app.post("/post", (request, response) => {
   });
 
   //send 200 status and redirect
-  response.status(200).redirect(path.resolve("/"));
+  // response.status(200).redirect(path.resolve("/popup"));
 });
 
 //I obviously did not figure out how to do this - I couldn't get the info to communicate to the server
 app.post("/edit/:_id", async (request, response) => {
-  console.log(request.body);
+  console.log("request.body:", request.body);
   let entryId = { _id: request.params._id };
-  let updateEntry = { [request.body.category]: request.body.update };
-  await EntriesModel.updateOne(entryId, updateEntry);
+  let updateEntry = request.body;
+  console.log("entryId", entryId)
+  console.log("updateEntry:", updateEntry)
+  await EntriesModel.findByIdAndUpdate(entryId, updateEntry);
   response.redirect(path.resolve("/facts"));
 });
 
@@ -82,7 +90,7 @@ app.get("/showall", async (request, response) => {
 //delete an entry
 app.get("/delete/:id", async (request, response) => {
   await EntriesModel.deleteOne({ _id: request.params.id });
-  response.status(200).redirect(path.resolve("/"));
+  response.redirect(path.resolve("/facts"));
 });
 
 //find a certain entry
