@@ -22,12 +22,15 @@ app.use(
 );
 
 //Database Set-up
-mongoose.connect("mongodb://localhost:27017/log", {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  "mongodb+srv://today-megan-learned:TILCricket@21@cluster0.9xf59.mongodb.net/adMagic?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  }
+);
 //I guess we don't need these?:{ useNewUrlParser: true, useUnifiedTopology: true}
 
 const entrySchema = new mongoose.Schema({
