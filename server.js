@@ -22,7 +22,16 @@ app.use(
 );
 
 //Database Set-up
-const MongoClient = require("mongodb").MongoClient;
+// mongoose.connect(
+  
+//   "mongodb+srv://today-megan-learned:Cricket21@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority", "log", "entries",
+//   {
+//     useCreateIndex: true,
+//     useUnifiedTopology: true,
+//   }
+// );
+
+// const MongoClient = require("mongodb").MongoClient;
 const uri =
   "mongodb+srv://today-megan-learned:today@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
