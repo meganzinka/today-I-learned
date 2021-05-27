@@ -23,12 +23,10 @@ app.use(
 
 //Database Set-up
 mongoose.connect(
-  "mongodb+srv://today-megan-learned:Cricket21@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority", "log", "entries",
+  "mongodb+srv://today-megan-learned:Cricket21@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority", "log", "entries",
   {
-    useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
   }
 );
 
