@@ -23,7 +23,7 @@ app.use(
 
 //Database Set-up
 mongoose.connect(
-  "mongodb+srv://today-megan-learned:Cricket21@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority",
+  "mongodb+srv://today-megan-learned:Cricket21@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority", "log", "entries",
   {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -31,7 +31,6 @@ mongoose.connect(
     useFindAndModify: false,
   }
 );
-//I guess we don't need these?:{ useNewUrlParser: true, useUnifiedTopology: true}
 
 const entrySchema = new mongoose.Schema({
   title: String,
