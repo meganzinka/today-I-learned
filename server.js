@@ -23,7 +23,7 @@ app.use(
 
 //Database Set-up
 mongoose.connect(
-  "mongodb+srv://today-megan-learned:TILCricket@21@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority",
+  "mongodb+srv://today-megan-learned:Cricket21@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useCreateIndex: true,
