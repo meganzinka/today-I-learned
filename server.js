@@ -1,9 +1,10 @@
 //Imports
-const mongoose = require("mongoose");
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
+const app = express();
+const mongoose = require("mongoose");
 const { MongoClient, ObjectId } = require("mongodb");
-require("dotenv").config();
 
 //Global variables
 const port = process.env.PORT || 5000;
@@ -11,7 +12,6 @@ const staticDir = process.env.PRODUCTION
   ? path.resolve("./client/build")
   : path.resolve("./client/public");
 //Server set-up
-const app = express();
 app.use(express.static(staticDir));
 app.use(
   express.urlencoded({
@@ -22,13 +22,18 @@ app.use(
 );
 
 //Database Set-up
-mongoose.connect(
-  "mongodb+srv://today-megan-learned:Cricket21@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority", "log", "entries",
-  {
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  }
-);
+const MongoClient = require("mongodb").MongoClient;
+const uri =
+  "mongodb+srv://today-megan-learned:today@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+client.connect((err) => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 const entrySchema = new mongoose.Schema({
   title: String,
