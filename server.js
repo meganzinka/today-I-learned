@@ -32,17 +32,24 @@ app.use(
 // );
 
 // const MongoClient = require("mongodb").MongoClient;
-const uri =
-  "mongodb+srv://today-megan-learned:today@cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
+// const uri =
+//   "mongodb+srv://today-megan-learned:today@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+// client.connect((err) => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
+const mongoAtlastUri = `mongodb+srv://today-megan-learned:today@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority`
+
+mongoose.connect(mongoAtlastUri, {
+  useNewUrlParser: true, 
   useUnifiedTopology: true,
-});
-client.connect((err) => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+})
 
 const entrySchema = new mongoose.Schema({
   title: String,
@@ -53,6 +60,10 @@ const entrySchema = new mongoose.Schema({
 });
 const EntriesModel = mongoose.model("entries", entrySchema);
 const entriesDB = mongoose.connection;
+
+entriesDB.on("error", (err) => {
+  console.error(err); 
+})
 
 //Port setup
 app.listen(port, () => {
