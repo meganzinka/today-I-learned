@@ -67,12 +67,21 @@ app.get("/new-entry/:title/:content/:tag/*", (request, response) => {
 });
 
 app.post("/edit/:_id", async (request, response) => {
-  console.log("request.body:", request.body);
-  let entryId = { _id: request.params._id };
+  let entryId = request.params._id;
   let updateEntry = request.body;
   console.log("entryId", entryId);
+    let newObj = {
+      date: Date.now(),
+      title: request.params.title,
+      content: request.params.content,
+      tag: request.params.tag,
+      link: request.params[0],
+    };
   console.log("updateEntry:", updateEntry);
-  await EntriesModel.findByIdAndUpdate(entryId, updateEntry);
+  await EntriesModel.updateOne(
+    { _id: `${entryId}` },
+      newObj
+  );
   response.redirect(path.resolve("/facts"));
 });
 
