@@ -21,6 +21,8 @@ app.use(
   })
 );
 
+var ObjectID = require("mongodb").ObjectID;
+
 const mongoAtlastUri = `mongodb+srv://today-megan-learned:today@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoAtlastUri, {
@@ -50,6 +52,7 @@ app.listen(port, () => {
 //Post a new TIL entry
 app.get("/new-entry/:title/:content/:tag/*", (request, response) => {
   //create new object with request params, date
+  console.log(request.params)
   let newObj = {
     date: Date.now(),
     title: request.params.title,
@@ -58,7 +61,7 @@ app.get("/new-entry/:title/:content/:tag/*", (request, response) => {
     link: request.params[0],
   };
   //create new entry
-  const newEntry = new EntriesModel(newObj);
+  const newEntry = EntriesModel.insertMany(newObj);
   //save entry
   newEntry.save(function (err) {
     if (err) throw err;
@@ -68,17 +71,14 @@ app.get("/new-entry/:title/:content/:tag/*", (request, response) => {
 app.post("/edit/:_id", async (request, response) => {
   let entryId = request.params._id;
   let updateEntry = request.body;
-  console.log("entryId", entryId);
   let newObj = {
     date: Date.now(),
-    title: request.params.title,
-    content: request.params.content,
-    tag: request.params.tag,
-    link: request.params[0],
+    title: request.body.title,
+    content: request.body.content,
+    tag: request.body.tag,
+    link: request.body.link[0],
   };
-  console.log(newObj);
-  console.log("updateEntry:", updateEntry);
-  await EntriesModel.updateOne({ _id: `${entryId}` }, newObj);
+  await EntriesModel.replaceOne({ _id: request.params._id.toString() }, newObj, {upsert:true});
   response.redirect(path.resolve("/facts"));
 });
 

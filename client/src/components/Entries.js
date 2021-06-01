@@ -31,7 +31,6 @@ const Entries = (props) => {
         });
       setLoadEntries(false);
     } else if (deleteEntry) {
-      console.log(deleteEntry);
       //if user wants to delete, set deleteEntry to true and fetch
       fetch(`/delete/${id}`);
       setDeleteEntry(false);
@@ -41,7 +40,6 @@ const Entries = (props) => {
   useEffect (() => {
     if (editId) {
     for (let i = 0; i < entryArray.length; i++) {
-      console.log(entryArray[i])
       if (entryArray[i]._id === editId) {
           setEntry(entryArray[i]);
           break; 
@@ -53,7 +51,7 @@ const Entries = (props) => {
 
   function parseDate(obj) {
     let time;
-    let hour = +obj.date.slice(11, 13);
+    let hour = +obj.date.slice(11, 13) - 4;
     if (hour > 12) {
       hour = hour - 12;
       time = `${hour}:${obj.date.slice(14, 16)} PM`;
@@ -93,13 +91,8 @@ const Entries = (props) => {
   //used to show and hide the edit entry pop-up
   function editMessage(event) {
     if (event.target.id === "cancel-button") {
-      console.log("inside if cancel");
       setEditMode(false);
     } else {
-      console.log("inside else");
-      console.log(editMode)
-      console.log(entry)
-      console.log(editId)
       setEditId(event.target.id);
       }
     }

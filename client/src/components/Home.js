@@ -14,7 +14,7 @@ const Home = () => {
   const [politicsTag, setPoliticsTag] = useState(false);
   const [healthTag, setHealthTag] = useState(false);
   const [otherTag, setOtherTag] = useState(false);
-  const [tag, setTag] = useState(["none"]);
+  const [tag, setTag] = useState(["other"]);
   const [updateTags, setUpdateTags] = useState(false) 
 
   function triggerPopUp(event) {
@@ -36,6 +36,9 @@ const Home = () => {
       } if (healthTag) {
         tempArray.push("health")
       } if (otherTag) {
+        tempArray.push("other")
+      } 
+      if (tempArray.length === 0) {
         tempArray.push("other")
       }
       setTag(tempArray)
