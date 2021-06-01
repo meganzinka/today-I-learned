@@ -21,13 +21,12 @@ app.use(
   })
 );
 
-
-const mongoAtlastUri = `mongodb+srv://today-megan-learned:today@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority`
+const mongoAtlastUri = `mongodb+srv://today-megan-learned:today@Cluster0.rgtrz.mongodb.net/log?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoAtlastUri, {
-  useNewUrlParser: true, 
+  useNewUrlParser: true,
   useUnifiedTopology: true,
-})
+});
 
 const entrySchema = new mongoose.Schema({
   title: String,
@@ -40,8 +39,8 @@ const EntriesModel = mongoose.model("entries", entrySchema);
 const entriesDB = mongoose.connection;
 
 entriesDB.on("error", (err) => {
-  console.error(err); 
-})
+  console.error(err);
+});
 
 //Port setup
 app.listen(port, () => {
@@ -70,18 +69,16 @@ app.post("/edit/:_id", async (request, response) => {
   let entryId = request.params._id;
   let updateEntry = request.body;
   console.log("entryId", entryId);
-    let newObj = {
-      date: Date.now(),
-      title: request.params.title,
-      content: request.params.content,
-      tag: request.params.tag,
-      link: request.params[0],
-    };
+  let newObj = {
+    date: Date.now(),
+    title: request.params.title,
+    content: request.params.content,
+    tag: request.params.tag,
+    link: request.params[0],
+  };
+  console.log(newObj);
   console.log("updateEntry:", updateEntry);
-  await EntriesModel.updateOne(
-    { _id: `${entryId}` },
-      newObj
-  );
+  await EntriesModel.updateOne({ _id: `${entryId}` }, newObj);
   response.redirect(path.resolve("/facts"));
 });
 
