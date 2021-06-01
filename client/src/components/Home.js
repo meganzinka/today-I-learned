@@ -15,10 +15,10 @@ const Home = () => {
   const [healthTag, setHealthTag] = useState(false);
   const [otherTag, setOtherTag] = useState(false);
   const [tag, setTag] = useState(["other"]);
-  const [updateTags, setUpdateTags] = useState(false) 
+  const [updateTags, setUpdateTags] = useState(false);
 
   function triggerPopUp(event) {
-    setUpdateTags(true)
+    setUpdateTags(true);
   }
 
   let tempArray = [];
@@ -26,41 +26,46 @@ const Home = () => {
   useEffect(() => {
     if (updateTags) {
       if (artsTag) {
-        tempArray.push("arts")
-      } if (scienceTag) {
-        tempArray.push("science")
-      } if (historyTag) {
-        tempArray.push("history")
-      } if(politicsTag) {
-        tempArray.push("politics")
-      } if (healthTag) {
-        tempArray.push("health")
-      } if (otherTag) {
-        tempArray.push("other")
-      } 
-      if (tempArray.length === 0) {
-        tempArray.push("other")
+        tempArray.push("arts");
       }
-      setTag(tempArray)
+      if (scienceTag) {
+        tempArray.push("science");
+      }
+      if (historyTag) {
+        tempArray.push("history");
+      }
+      if (politicsTag) {
+        tempArray.push("politics");
+      }
+      if (healthTag) {
+        tempArray.push("health");
+      }
+      if (otherTag) {
+        tempArray.push("other");
+      }
+      if (tempArray.length === 0) {
+        tempArray.push("other");
+      }
+      setTag(tempArray);
       setSendNewPost(true);
-      setUpdateTags(false)
+      setUpdateTags(false);
     }
-  })
+  });
 
   useEffect(() => {
     if (sendNewPost) {
       fetch(`/new-entry/${title}/${content}/${tag}/${source}`);
       setShowConfirmation(true);
-      setSendNewPost(false)
+      setSendNewPost(false);
     }
   });
 
   function setPost(event) {
     if (event.target.id === "new-post-title") {
-      let newTitle = event.target.value; 
+      let newTitle = event.target.value;
       setTitle(newTitle.replace("/", "-"));
     } else if (event.target.id === "new-post-content") {
-      let newContent = event.target.value
+      let newContent = event.target.value;
       setContent(newContent.replace("/", "-"));
     } else if (event.target.id === "new-post-source") {
       setSource(event.target.value);
@@ -84,7 +89,7 @@ const Home = () => {
   //add entry form with fields for title, content, tags, submit
   return (
     <div>
-      <h1 Name="page-header"> What did you learn today? </h1>
+      <h1 className="page-header"> What did you learn today? </h1>
       <div className="label-container">
         <label>Title</label>
       </div>
@@ -131,7 +136,7 @@ const Home = () => {
             name="tag"
             value="science"
             onClick={setPost}
-            checked ={scienceTag}
+            checked={scienceTag}
           />
           <label for="science">science</label>
         </div>
@@ -142,7 +147,7 @@ const Home = () => {
             name="tag"
             value="history"
             onClick={setPost}
-            checked = {historyTag}
+            checked={historyTag}
           />
           <label for="history">history</label>
         </div>
@@ -153,7 +158,7 @@ const Home = () => {
             name="tag"
             value="politics"
             onClick={setPost}
-            checked = {politicsTag}
+            checked={politicsTag}
           />
           <label for="politics">politics</label>
         </div>
@@ -164,7 +169,7 @@ const Home = () => {
             name="tag"
             value="health"
             onClick={setPost}
-            checked = {healthTag}
+            checked={healthTag}
           />
           <label for="health">health</label>
         </div>
@@ -175,7 +180,7 @@ const Home = () => {
             name="tag"
             value="arts"
             onClick={setPost}
-            checked = {artsTag}
+            checked={artsTag}
           />
           <label for="arts">arts</label>
         </div>
@@ -186,7 +191,7 @@ const Home = () => {
             name="tag"
             value="other"
             onClick={setPost}
-            checked = {otherTag}
+            checked={otherTag}
           />
           <label for="other">other</label>
         </div>
@@ -205,12 +210,12 @@ const Home = () => {
           content={content}
           setContent={setContent}
           tag={tag}
-          setScienceTag = {setScienceTag}
-          setHistoryTag = {setHistoryTag}
-          setPoliticsTag = {setPoliticsTag} 
-          setHealthTag = {setHealthTag} 
-          setArtsTag = {setArtsTag}
-          setOtherTag = {setOtherTag}
+          setScienceTag={setScienceTag}
+          setHistoryTag={setHistoryTag}
+          setPoliticsTag={setPoliticsTag}
+          setHealthTag={setHealthTag}
+          setArtsTag={setArtsTag}
+          setOtherTag={setOtherTag}
           source={source}
           setSource={setSource}
           showConfirmation={showConfirmation}
